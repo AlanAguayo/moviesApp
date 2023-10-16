@@ -7,18 +7,18 @@ interface InterfacePaginate {
 
 const Paginate = ({ currentPage, totalPages }: InterfacePaginate) => {
   return (
-    <div className="flex justify-center gap-4 mt-6 mb-6">
-      {currentPage > 1 && ( //&& hace que renderice dependiendo de la condicionalg
+    <div className="flex justify-center gap-4"> 
+      {currentPage > 1 && ( //&& hace que renderice dependiendo de la condicional
         <Link
           href={`/movies/popular/?page=${Number(currentPage) - 1}`}
-          className="bg-cyan-900 text-white font-bold py-2 px-4 rounded-r">
+          className="bg-gray-800 font-bold py-2 px-4">
           Prev 
         </Link>
       )}
       {currentPage < totalPages && (
         <Link
           href={`/movies/popular/?page=${Number(currentPage) + 1}`}
-          className="bg-cyan-900 text-white font-bold py-2 px-4 rounded-l">
+          className="bg-gray-800 font-bold py-2 px-4">
           Next
         </Link>
       )}

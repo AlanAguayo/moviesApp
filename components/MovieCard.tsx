@@ -13,7 +13,7 @@ export interface MovieCardInterface {
 const MovieCard = ({ movie }: { movie: MovieCardInterface }) => {
   return (
     <Link href={`/movie/${movie?.id}`} className="w-full flex flex-col">
-      <div className="w-full h-[400px] relative">
+      <div className="h-[400px] relative">
         <Image
           src={
             movie?.poster_path
@@ -24,10 +24,10 @@ const MovieCard = ({ movie }: { movie: MovieCardInterface }) => {
           fill={true}
         />
       </div>
-      <div className="flex gap-4 justify-between items-center mt-3 bg-red">
-        <h2 className="text-lg font-medium">{movie?.title}</h2>
+      <div className="flex justify-between items-center">
+        <h2 className="text-lg">{movie?.title}</h2>
         <span
-          className={`flex flex-col p-2 text-white rounded-md ${
+          className={`p-2 rounded-md ${
             movie?.vote_average < 5
               ? `bg-red-700`
               : movie?.vote_average == 5

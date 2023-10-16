@@ -5,7 +5,7 @@ import dayjs from "dayjs";
 import Image from "next/image";
 import Dashboard from "@/components/Dashboard";
 
-interface IParamsMovieDetails {
+interface InterfaceParamsMovieDetails {
   params: {
     id: MovieCardInterface["id"];
   };
@@ -25,7 +25,7 @@ async function getMovieCasts(id: MovieCardInterface["id"]) {
   return res.json();
 }
 
-const page = async ({ params }: IParamsMovieDetails) => {
+const page = async ({ params }: InterfaceParamsMovieDetails) => {
   const { id } = params;
   const movie = await getMovieDetails(id);
   const movieCast = await getMovieCasts(id);
@@ -36,11 +36,10 @@ const page = async ({ params }: IParamsMovieDetails) => {
   return (
     <>
     <Dashboard></Dashboard>
-    <main className="mt-5 flex flex-col">
-      <div className="w-[1000px] max-w-full px-4 mx-auto">
-        <div className="flex flex-col mt-6">
+      <div className="w-[1000px] mx-auto">
+        <div className="mt-6">
           <div className="flex gap-7">
-            <div className="flex relative">
+            <div>
               <div className="w-[270px] h-[400px] relative">
                 <Image
                   src={
@@ -53,11 +52,11 @@ const page = async ({ params }: IParamsMovieDetails) => {
                 />
               </div>
             </div>
-            <div className="flex flex-col">
-              <div className="flex gap-3 items-center">
-                <h2 className="text-xl font-medium">{movie?.title}</h2>
+            <div>
+              <div className="flex gap-3">
+                <h2 className="text-xl">{movie?.title}</h2>
                 <span
-                  className={`flex flex-col p-2 text-white rounded-md ${
+                  className={`p-2 rounded-md ${
                     movie?.vote_average < 5
                       ? `bg-red-700`
                       : movie?.vote_average == 5
@@ -69,40 +68,37 @@ const page = async ({ params }: IParamsMovieDetails) => {
                 </span>
               </div>
               <div className="flex gap-4 items-center mt-4">
-                <h5 className="text-md font-medium">
+                <h5>
                   {dayjs(movie?.release_date).format("MMM DD YYYY")}
                 </h5>
                 <h5> | </h5>
                 {movie?.runtime > 0 && (
                   <>
-                    <h5 className="text-md font-medium">{`${durationHours}h ${durationMinutes}m`}</h5>
+                    <h5>{`${durationHours}h ${durationMinutes}m`}</h5>
                     <h5> | </h5>
                   </>
                 )}
-                <h5 className="text-md font-medium">
+                <h5>
                   {movie?.genres?.map((genre: any) => genre?.name).join(", ")}
                 </h5>
               </div>
-              <div className="flex flex-col mt-5">
-                <p className="text-md font-normal">{movie?.overview}</p>
+              <div className="mt-5">
+                <p>{movie?.overview}</p>
               </div>
             </div>
           </div>
         </div>
       </div>
-      <div className="w-[1200px] max-w-full px-4 mx-auto">
-        <div className="flex flex-col mb-6 mt-6">
-          <div className="flex justify-between items-center mt-4">
-            <h1 className="text-2xl font-medium">Cast</h1>
+      <div className="w-[1200px] mx-auto">
+          <div className="mt-4">
+            <h1 className="text-2xl">Cast</h1>
           </div>
-          <div className="grid grid-cols-4 mt-10 gap-5">
+          <div className="grid grid-cols-4 gap-4">
             {movieCast?.cast?.slice(0, 8).map((cast: ICastCard) => (
               <CastCard key={cast?.id} cast={cast} />
             ))}
           </div>
         </div>
-       </div>
-    </main>
     </>
   );
 };

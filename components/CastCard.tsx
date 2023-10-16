@@ -11,8 +11,8 @@ export interface ICastCard {
 
 const CastCard = ({ cast }: { cast: ICastCard }) => {
   return (
-    <div className="w-full flex flex-col">
-      <div className="w-full h-[400px] relative">
+    <div>
+      <div className="h-[400px] relative">
         <Image
           src={
             cast?.profile_path
@@ -23,10 +23,8 @@ const CastCard = ({ cast }: { cast: ICastCard }) => {
           fill={true}
         />
       </div>
-      <div className="flex flex-col gap-1 mt-3">
-        <h2 className="text-lg font-medium"><b>Name:</b> {cast?.name}</h2>
-        <h2 className="text-lg font-medium"><b>Character:</b> {cast?.character}</h2>
-      </div>
+        <h2><b>Name:</b> {cast?.name}</h2>
+        <h2><b>Character:</b> {cast?.character}</h2>
     </div>
   );
 };
